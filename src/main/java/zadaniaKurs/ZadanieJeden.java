@@ -28,6 +28,25 @@ public class ZadanieJeden {
     }
 
 
+    public static void updateUser (Uzytkownik uzytkownik) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        uzytkownik = (Uzytkownik) session.merge(uzytkownik);
+        session.flush();
+        session.close();
+    }
+
+    public static void deleteUser (long ID) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Uzytkownik uzytkownikUsuwany = new Uzytkownik();
+        uzytkownikUsuwany.setId(ID);
+        session.delete(uzytkownikUsuwany);
+        session.flush();
+        session.close();
+    }
+
+
 }
 
 
